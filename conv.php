@@ -1,5 +1,10 @@
 <?php
-define("CSAKURA", "/home/kujirazake/repos/sakuramml/csakura");
+$config = __DIR__."/config.php";
+if (file_exists($config)) {
+    include_once($config);
+} else {
+    define('CSAKURA', 'csakura');
+}
 
 function get_midi_url($id) {
     $base_url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
