@@ -32,6 +32,15 @@ if (!is_dir($midi_directory)) {
 $mmlpath = $mml_directory . "/" . $mml_id . ".mml";
 $midipath = $midi_directory . "/" . $mml_id . ".mid";
 
+if (file_exists($midipath)) {
+    // すでにMIDIファイルが存在する場合はダウンロードせずにそのまま返す
+    header("Access-Control-Allow-Origin: *");
+    header("Content-Type: audio/midi");
+    header("Content-Disposition: attachment; filename=\"output.mid\"");
+    readfile($midipath);
+    exit;
+}
+
 // ファイルをダウンロードして保存
 $file_content = file_get_contents($download_url);
 if ($file_content === false) {
