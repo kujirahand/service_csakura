@@ -13,6 +13,7 @@ if (!isset($_GET['mml_id']) || empty($_GET['mml_id'])) {
 }
 // mml_idを取得
 $mml_id = $_GET['mml_id'];
+$nocache = isset($_GET['nocache']) ? int($_GET['nocache']) : false;
 
 // ダウンロードURLを構築
 $download_url = "https://sakuramml.com/mmlbbs6/post.php?action=download&mml_id=" . urlencode($mml_id);
@@ -32,7 +33,7 @@ if (!is_dir($midi_directory)) {
 $mmlpath = $mml_directory . "/" . $mml_id . ".mml";
 $midipath = $midi_directory . "/" . $mml_id . ".mid";
 
-if (file_exists($midipath)) {
+if (file_exists($midipath) && !$nocache) {
     // すでにMIDIファイルが存在する場合はダウンロードせずにそのまま返す
     header("Access-Control-Allow-Origin: *");
     header("Content-Type: audio/midi");
