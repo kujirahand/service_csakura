@@ -1,5 +1,7 @@
 db/*
 mml/*
 midi/*
+mmlbbs6-midi/*
+mmlbbs6-mml/*
 config.php
 
